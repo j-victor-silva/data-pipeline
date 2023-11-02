@@ -1,0 +1,12 @@
+name: send_request_to_cloud_function
+run-name: running code
+
+on: ["push"]
+
+jobs:
+    send-message:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: pip install -r requirements.txt
+            - run: python3 main.py
