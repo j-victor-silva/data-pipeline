@@ -1,13 +1,15 @@
-import requests
 import json
+import requests
+import subprocess
 
-
-key_path = "local-sprite-402222-12c4e0fe07a9.json"
-
-with open(key_path, "r") as key_file:
-    key_data = json.load(key_file)
 
 def send_request(url: str, message: str="") -> None:
+    token = '{}'.format(subprocess.Popen(
+        args="gcloud auth print-identity-token",
+        stdout=subprocess.PIPE,
+        shell=True).communicate()[0]
+        )[2:-3]
+    
     if message == "":
         # Send an HTTP GET request to the URL
         response = requests.get(url)
@@ -16,6 +18,7 @@ def send_request(url: str, message: str="") -> None:
         json_data = json.dumps(message)
         
         headers = {
+            "Authorization": "Bearer {}".format(token),
             "Content-Type": "application/json",
         }
 
@@ -25,9 +28,7 @@ def send_request(url: str, message: str="") -> None:
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
         print("Request was successful.")
-
-        print("Response content:")
-        print(response.text)
+        print("Response content: ", response.text)
     else:
         print(f"Request failed with status code: {response.status_code}")
         print(response.text)
