@@ -7,6 +7,8 @@ jobs:
     send-request:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v4
+            
             - id: 'auth'
               uses: google-github-actions/auth@v1
               with:
@@ -15,6 +17,5 @@ jobs:
             - name: Set up Cloud SDK
               uses: google-github-actions/setup-gcloud@v1
 
-            - uses: actions/checkout@v4
             - run: pip install -r requirements.txt
             - run: python3 main.py
