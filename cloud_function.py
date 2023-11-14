@@ -8,9 +8,9 @@ def publish_to_pubsub(request):
         return 'No data provided in request', 400
 
     # Replace 'your-project-id' with your Google Cloud project ID
-    project_id = 'local-sprite-402222'
+    project_id = 'PROJECT_ID'
     # Replace 'your-topic-name' with the name of your Pub/Sub topic
-    topic_name = 'send-message-to-bigquery'
+    topic_name = 'TOPIC_ID'
 
     publisher = pubsub_v1.PublisherClient()
     topic_path = publisher.topic_path(project_id, topic_name)

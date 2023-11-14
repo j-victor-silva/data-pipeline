@@ -40,7 +40,7 @@ if __name__ == "__main__":
     with open(json_file, "r") as file:
         data = json.load(file)
         
-    url = "https://us-central1-local-sprite-402222.cloudfunctions.net/send_message_to_pubsub"
+    url = "CLOUD_FUNCTION/URL"
     
     send_request(url=url, message=data)
     
