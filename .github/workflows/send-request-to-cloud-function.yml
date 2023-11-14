@@ -1,7 +1,10 @@
 name: send_request_to_cloud_function
 run-name: running code
 
-on: ["push"]
+on:
+    push:
+        paths:
+            - 'data.json'
 
 jobs:
     send-request:
